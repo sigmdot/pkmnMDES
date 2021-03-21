@@ -16,3 +16,9 @@
   color: white;
   font-size: 1.1vw;
 }
+.transparency{
+  background-color: transparent;
+  border: 0;
+  color: white;
+  text-align: left !important;
+}

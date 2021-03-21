@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-medidor',
@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medidor.component.css']
 })
 export class MedidorComponent implements OnInit {
-
+  @Input() personality: Array<any>;
+  @Input() totalpp:any;
   constructor() { }
 
   ngOnInit(): void {

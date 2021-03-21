@@ -1,18 +1,10 @@
-<div class="col-12 test-quest p-3 mb-2">
-  <p class="m-0 text-center">
-    {{ question.question }}
-  </p>
+<div id="lol" class="col-12 test-quest p-3 mb-2">
+  <div id="questionText" class="m-0 text-center quest">
+    {{question.question}}
+  </div>
 </div>
 <div class="col-5 answers p-2">
   <div *ngFor="let answer of question.answers">
-    <input
-      type="radio"
-      id="male"
-      name="gender"
-      value="male"
-      
-    />
-    <label for="male">{{ answer.answer }}</label
-    ><br />
+    <button (click)="sendAnswer(answer)" class="w-100 transparency text-left" matStepperNext>{{answer.answer}}</button>
   </div>
 </div>
