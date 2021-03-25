@@ -21,7 +21,6 @@ export class TestQuestComponent implements OnInit, OnChanges {
   constructor() {}
 
   sendAnswer(answer:any){
-    console.log(answer);
     this.answerEmitter.emit(answer);
   }
 

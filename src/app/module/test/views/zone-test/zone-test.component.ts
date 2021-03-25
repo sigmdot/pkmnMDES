@@ -9,67 +9,67 @@ export class ZoneTestComponent implements OnInit {
   totalpp = 0;
   personality = [
     {
-      name: 'Osado',
+      name: 'Osado', //BOLD
       points: 0,
     },
     {
-      name: 'Valiente',
+      name: 'Valiente', //BRAVE
       points: 0,
     },
     {
-      name: 'Calmado',
+      name: 'Calmado', // CALM
       points: 0,
     },
     {
-      name: 'Dócil',
+      name: 'Dócil', // Docile
       points: 0,
     },
     {
-      name: 'Vigoroso',
+      name: 'Vigoroso', // Hardy
       points: 0,
     },
     {
-      name: 'Apresurado',
+      name: 'Apresurado', // Hasty
       points: 0,
     },
     {
-      name: 'Travieso',
+      name: 'Travieso', //Impish
       points: 0,
     },
     {
-      name: 'Alegre',
+      name: 'Alegre', // Jolly
       points: 0,
     },
     {
-      name: 'Solitario',
+      name: 'Solitario', // Lonely
       points: 0,
     },
     {
-      name: 'Ingenuo',
+      name: 'Ingenuo', // Naive
       points: 0,
     },
     {
-      name: 'Tranquilo',
+      name: 'Tranquilo', // Quiet
       points: 0,
     },
     {
-      name: 'Peculiar',
+      name: 'Peculiar', // Quirky
       points: 0,
     },
     {
-      name: 'Imprudente',
+      name: 'Imprudente', // Rash
       points: 0,
     },
     {
-      name: 'Relajado',
+      name: 'Relajado', // Relaxed
       points: 0,
     },
     {
-      name: 'Atrevido',
+      name: 'Atrevido', // Sassy
       points: 0,
     },
     {
-      name: 'Timido',
+      name: 'Timido', // Timid
       points: 0,
     },
   ];
@@ -169,21 +169,35 @@ export class ZoneTestComponent implements OnInit {
       ],
     },
   ];
-  step(lol: any) {
-    console.log(lol);
+
+  getRandom(arr, n) {
+    var result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+    if (n > len)
+      throw new RangeError('getRandom: more elements taken than available');
+    while (n--) {
+      var x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+    }
+    return result;
   }
+
   getAnswer(answer: any) {
     answer.points.forEach((element) => {
       this.personality.forEach((e) => {
         if (e.name === element.name) {
-          console.log(e, 'e');
           e.points = e.points + element.points;
-          this.totalpp = this.totalpp + e.points;
+          console.log(e.points, 'personality points');
         }
-        console.log('totalpp = ', this.totalpp);
       });
-      console.log(element, 'Element');
     });
+    this.totalpp = 0;
+    this.personality.forEach((e) => {
+      this.totalpp = this.totalpp + e.points;
+    });
+    console.log('totalpp = ', this.totalpp);
   }
   constructor() {}
 
