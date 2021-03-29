@@ -8,14 +8,17 @@ import { MedidorComponent } from './components/medidor/medidor.component';
 import { PersonalityItemComponent } from './components/personality-item/personality-item.component';
 import { TestQuestComponent } from './components/test-quest/test-quest.component';
 import { MaterialModule } from 'src/app/material/material.module';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { LastQuestionComponent } from './components/last-question/last-question.component';
 
 
 @NgModule({
-  declarations: [TestComponent, ZoneTestComponent, MedidorComponent, PersonalityItemComponent, TestQuestComponent],
+  declarations: [TestComponent, ZoneTestComponent, MedidorComponent, PersonalityItemComponent, TestQuestComponent, LastQuestionComponent],
   imports: [
     CommonModule,
     TestRoutingModule,
     MaterialModule,
+    SharedModule
   ]
 })
 export class TestModule { }

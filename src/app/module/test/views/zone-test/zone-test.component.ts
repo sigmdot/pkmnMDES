@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-zone-test',
   templateUrl: './zone-test.component.html',
   styleUrls: ['./zone-test.component.css'],
 })
 export class ZoneTestComponent implements OnInit {
+  question$:Observable<any>;
+  questionser: Array<any> = null;
   totalpp = 0;
   personality = [
     {
@@ -73,121 +76,14 @@ export class ZoneTestComponent implements OnInit {
       points: 0,
     },
   ];
-  questions = [
-    {
-      question:
-        "Your friend suddenly won't listen to you, when everything was fine yesterday. What happened?",
-      answers: [
-        {
-          answer: 'Nada Bro',
-          points: [
-            {
-              name: 'Valiente',
-              points: 2,
-            },
-            {
-              name: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-        {
-          answer: 'Te mató bro, por jil',
-          points: [
-            {
-              name: 'Valiente',
-              points: 2,
-            },
-            {
-              name: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      question: '¿ Que pasa bro ?',
-      answers: [
-        {
-          answer: 'Nada Bro',
-          points: [
-            {
-              name: 'Valiente',
-              points: 2,
-            },
-            {
-              name: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-        {
-          answer: 'Te mató bro, por jil',
-          points: [
-            {
-              name: 'Valiente',
-              points: 2,
-            },
-            {
-              name: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      question: '¿ Que pasa bro ?',
-      answers: [
-        {
-          answer: 'Nada Bro',
-          points: [
-            {
-              nature: 'Valiente',
-              points: 2,
-            },
-            {
-              nature: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-        {
-          answer: 'Te mató bro, por jil',
-          points: [
-            {
-              nature: 'Valiente',
-              points: 2,
-            },
-            {
-              nature: 'Relajado',
-              points: 1,
-            },
-          ],
-        },
-      ],
-    },
-  ];
 
-  getRandom(arr, n) {
-    var result = new Array(n),
-      len = arr.length,
-      taken = new Array(len);
-    if (n > len)
-      throw new RangeError('getRandom: more elements taken than available');
-    while (n--) {
-      var x = Math.floor(Math.random() * len);
-      result[n] = arr[x in taken ? taken[x] : x];
-      taken[x] = --len in taken ? taken[len] : len;
-    }
-    return result;
-  }
 
   getAnswer(answer: any) {
+    console.log(answer);
     answer.points.forEach((element) => {
       this.personality.forEach((e) => {
-        if (e.name === element.name) {
+        console.log(`${e.name} == ${element.nature}`);
+        if (e.name === element.nature) {
           e.points = e.points + element.points;
           console.log(e.points, 'personality points');
         }
@@ -199,7 +95,13 @@ export class ZoneTestComponent implements OnInit {
     });
     console.log('totalpp = ', this.totalpp);
   }
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.question$ = this.http.get('http://localhost:4000/questions/random/15');
+    this.question$.subscribe((data)=>{
+      this.questionser = data.body;
+      console.log(this.questionser);
+    })
+  }
 }

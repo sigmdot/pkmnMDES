@@ -11,9 +11,12 @@
       <app-medidor [totalpp]="totalpp" [personality]="personality"></app-medidor>
     </div>
     <div class="col-9 border py-4 child">
-      <mat-horizontal-stepper linear #stepper class="backgroundTransp h-100">
-        <mat-step class="h-100" *ngFor="let question of questions,let i = index">
+      <mat-horizontal-stepper linear #stepper class="backgroundTransp h-100" *ngIf="questionser !== null">
+        <mat-step  class="h-100" *ngFor="let question of questionser,let i = index">
           <app-test-quest (answerEmitter)="getAnswer($event)" [question]="question"></app-test-quest>
+        </mat-step>
+        <mat-step>
+          <app-last-question></app-last-question>
         </mat-step>
       </mat-horizontal-stepper>
     </div>
