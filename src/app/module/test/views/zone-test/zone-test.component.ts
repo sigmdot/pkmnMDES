@@ -82,18 +82,11 @@ export class ZoneTestComponent implements OnInit {
     console.log(answer);
     answer.points.forEach((element) => {
       this.personality.forEach((e) => {
-        console.log(`${e.name} == ${element.nature}`);
         if (e.name === element.nature) {
           e.points = e.points + element.points;
-          console.log(e.points, 'personality points');
         }
       });
     });
-    this.totalpp = 0;
-    this.personality.forEach((e) => {
-      this.totalpp = this.totalpp + e.points;
-    });
-    console.log('totalpp = ', this.totalpp);
   }
   constructor(private http: HttpClient) {}
 

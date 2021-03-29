@@ -9,7 +9,7 @@ const routes: Routes = [
     component:TestComponent,
     children:[
       {
-        path:"",
+        path:"test",
         component: ZoneTestComponent
       }
     ]
